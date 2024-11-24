@@ -178,6 +178,26 @@ androidx-foundation-layout-android = { group = "androidx.compose.foundation", na
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
+android-test = { id = "com.android.test", version.ref = "androidGradlePlugin" }
+room = { id = "androidx.room", version.ref = "room" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+
+# Plugins defined by this project
+lwg-android-application = { id = "lwg.android.application", version = "unspecified" }
+lwg-android-compose = { id = "lwg.android.compose", version = "unspecified" }
+lwg-android-feature = { id = "lwg.android.feature", version = "unspecified" }
+lwg-android-library = { id = "lwg.android.library", version = "unspecified" }
+lwg-kotlin-library = { id = "lwg.kotlin.library", version = "unspecified" }
+lwg-android-room = { id = "lwg.android.room", version = "unspecified" }
+lwg-android-hilt = { id = "lwg.android.hilt", version = "unspecified" }
+lwg-kotlin-hilt = { id = "lwg.kotlin.hilt", version = "unspecified" }
 
