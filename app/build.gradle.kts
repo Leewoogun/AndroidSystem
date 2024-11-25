@@ -3,10 +3,10 @@ plugins {
 }
 
 android {
-    namespace = "com.lwg.androidsystem"
+    namespace = "com.lwg"
 
     defaultConfig {
-        applicationId = "com.lwg.androidsystem"
+        applicationId = "com.lwg"
     }
 
     buildTypes {
@@ -18,9 +18,9 @@ android {
             )
         }
     }
-    
+
     buildFeatures {
-        compose = true
+        buildConfig = true
     }
 
     packaging {
@@ -31,5 +31,5 @@ android {
 }
 
 dependencies {
-
+    implementation(projects.feature.main)
 }

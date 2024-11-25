@@ -22,4 +22,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "androidSystem"
 include(":app")
-
+include(":feature:main")
