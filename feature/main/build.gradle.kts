@@ -7,3 +7,7 @@ plugins {
 android {
     setNamespace("main")
 }
+
+dependencies {
+    implementation(projects.core.network)
+}
