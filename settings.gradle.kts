@@ -22,8 +22,12 @@ dependencyResolutionManagement {
 
 rootProject.name = "androidSystem"
 include(":app")
+
+include(
+    ":core:data",
+    ":core:designSystem",
+    ":core:navigation",
+    ":core:network",
+)
+
 include(":feature:main")
-include(":core")
-include(":core:network")
-include(":core:designSystem")
-include(":core:data")
