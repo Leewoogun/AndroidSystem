@@ -31,3 +31,6 @@ include(
 )
 
 include(":feature:main")
+include(":feature:home")
+include(":feature:favorite")
+include(":feature:calendar")

@@ -11,4 +11,5 @@ android {
 dependencies {
     implementation(projects.core.network)
     implementation(projects.core.designSystem)
+    implementation(projects.core.navigation)
 }

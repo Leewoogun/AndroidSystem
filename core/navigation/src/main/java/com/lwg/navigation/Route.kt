@@ -16,4 +16,7 @@ sealed interface MainBottomBarRoute : Route {
 
     @Serializable
     data object Favorite: MainBottomBarRoute
+
+    @Serializable
+    data object Calendar: MainBottomBarRoute
 }
