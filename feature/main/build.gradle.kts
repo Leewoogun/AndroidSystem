@@ -12,4 +12,8 @@ dependencies {
     implementation(projects.core.network)
     implementation(projects.core.designSystem)
     implementation(projects.core.navigation)
+
+    implementation(projects.feature.home)
+    implementation(projects.feature.favorite)
+    implementation(projects.feature.calendar)
 }

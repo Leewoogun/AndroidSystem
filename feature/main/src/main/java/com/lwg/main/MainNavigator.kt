@@ -1,17 +1,21 @@
 package com.lwg.main
 
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.navOptions
+import com.lwg.calendar.navigation.navigateToCalendar
+import com.lwg.favorite.navigation.navigateToFavorite
+import com.lwg.home.navigation.navigateToHome
 import com.lwg.main.component.MainBottomItem
+import com.lwg.navigation.MainBottomBarRoute
 import com.lwg.navigation.Route
 
 internal class MainNavigator(
-    val navController: NavController
+    val navController: NavHostController
 ) {
     private val currentDestination: NavDestination?
         @Composable get() = navController.currentBackStackEntryAsState().value?.destination
@@ -32,12 +36,21 @@ internal class MainNavigator(
             restoreState = true
         }
 
-        // TODO 각 화면 만들고 navigate 함수 붙히기
-//        when (bottomItem) {
-//            MainBottomItem.HOME -> navController.navigateHome(navOptions)
-//            MainBottomItem.FAVORITE -> navController.navigateSetting(navOptions)
-//            MainBottomItem.CALENDAR -> navController.navigateBookmark(navOptions)
-//        }
+        when (bottomItem) {
+            MainBottomItem.HOME -> navController.navigateToHome(navOptions)
+            MainBottomItem.FAVORITE -> navController.navigateToFavorite(navOptions)
+            MainBottomItem.CALENDAR -> navController.navigateToCalendar(navOptions)
+        }
+    }
+
+    private fun popBackStack() {
+        navController.popBackStack()
+    }
+
+    fun popBackStackIfNotHome() {
+        if (!isSameCurrentDestination<MainBottomBarRoute.Home>()) {
+            popBackStack()
+        }
     }
 
     private inline fun <reified T : Route> isSameCurrentDestination(): Boolean {
