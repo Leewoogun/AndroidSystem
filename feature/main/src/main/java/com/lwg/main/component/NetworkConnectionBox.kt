@@ -12,7 +12,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.lwg.designsystem.component.TopToBottomToTopAnimatedVisibility
-import com.lwg.designsystem.theme.Gray4
+import com.lwg.designsystem.theme.LwgTheme
+import com.lwg.designsystem.theme.primaryContainerLight
 import com.lwg.main.R
 
 @Composable
@@ -26,7 +27,7 @@ fun NetworkConnectionBox(
         Surface(
             modifier = modifier
                 .padding(10.dp),
-            color = Gray4.copy(alpha = 0.5f),
+            color = primaryContainerLight,
         ) {
             Box(
                 contentAlignment = Alignment.Center
@@ -44,9 +45,11 @@ fun NetworkConnectionBox(
 @Composable
 @Preview(showBackground = true)
 fun NetworkConnectionBoxPreview() {
-    NetworkConnectionBox(
-        networkState = false,
-        modifier = Modifier
-            .fillMaxWidth()
-    )
+    LwgTheme {
+        NetworkConnectionBox(
+            networkState = false,
+            modifier = Modifier
+                .fillMaxWidth()
+        )
+    }
 }

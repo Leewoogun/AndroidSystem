@@ -9,6 +9,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import com.lwg.designsystem.theme.LwgTheme
 import com.lwg.main.component.rememberMainNavigator
 import com.lwg.network.NetworkManager
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,13 +38,14 @@ class MainActivity: ComponentActivity() {
                     )
                 }
             }
-
-            MainScreen(
-                navigator = navigator,
-                snackBarHostState = snackBarHostState,
-                networkState = networkState,
-                onShowSnackBar = onShowSnackBar
-            )
+            LwgTheme {
+                MainScreen(
+                    navigator = navigator,
+                    snackBarHostState = snackBarHostState,
+                    networkState = networkState,
+                    onShowSnackBar = onShowSnackBar
+                )
+            }
         }
     }
 }
