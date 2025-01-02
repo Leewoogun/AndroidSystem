@@ -7,6 +7,6 @@ TMDB Api를 활용하여 간단한 영화 관련 프로젝트 만들기
 - [x] build-logic 구축
 - [x] connectivity Manager를 이용한 네트워크 연결 관리 시스템 구축
 - [x] Http 통신 처리 시스템 구축
-- [ ] navigation 시스템 구축 (with type safety)
+- [x] navigation 시스템 구축 (with type safety)
 - [ ] 디자인 시스템 구축
 - [ ] feature 개발 
