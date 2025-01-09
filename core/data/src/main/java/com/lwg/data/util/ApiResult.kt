@@ -8,8 +8,8 @@ internal sealed interface ApiResult<out T> {
     data class Success<T>(val response: T) : ApiResult<T>
 
     sealed interface Failure : ApiResult<Nothing> {
-        data class HttpError(val code: Int, val message: String, val body: String) : Failure
-        data class CustomError(val code: Int, val message: String) : Failure
+        data class HttpError(val status_code: Int, val status_message: String, val success: Boolean) : Failure
+        data class CustomError(val status_code: Int, val status_message: String, val success: Boolean) : Failure
         data object NetworkError : Failure
         data class UnknownApiError(val throwable: Throwable) : Failure
     }
@@ -67,7 +67,7 @@ internal inline fun <T> ApiResult<T>.suspendOnFailureWithErrorHandling(
     if (this is ApiResult.Failure) {
         when (this) {
             is ApiResult.Failure.HttpError -> {
-                onError(message)
+                onError(status_message)
             }
 
             ApiResult.Failure.NetworkError -> {
@@ -79,7 +79,7 @@ internal inline fun <T> ApiResult<T>.suspendOnFailureWithErrorHandling(
             }
 
             is ApiResult.Failure.CustomError -> {
-                onError(message)
+                onError(status_message)
             }
         }
     }
