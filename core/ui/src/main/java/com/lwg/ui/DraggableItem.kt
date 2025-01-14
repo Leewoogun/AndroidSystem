@@ -27,7 +27,6 @@ fun DraggableItem(
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .height(100.dp)
     ) {
 
         endAction?.let {

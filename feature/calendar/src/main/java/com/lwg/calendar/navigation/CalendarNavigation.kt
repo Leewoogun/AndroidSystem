@@ -10,7 +10,7 @@ import com.lwg.navigation.MainBottomBarRoute
 fun NavController.navigateToCalendar(
     navOptions: NavOptions? = null
 ) {
-    navigate(MainBottomBarRoute.Calendar)
+    navigate(MainBottomBarRoute.Calendar, navOptions)
 }
 
 fun NavGraphBuilder.calendarNavGraph(

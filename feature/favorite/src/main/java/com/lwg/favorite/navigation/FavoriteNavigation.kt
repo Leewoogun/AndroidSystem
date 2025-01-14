@@ -10,7 +10,7 @@ import com.lwg.navigation.MainBottomBarRoute
 fun NavController.navigateToFavorite(
     navOptions: NavOptions? = null
 ) {
-    navigate(MainBottomBarRoute.Favorite)
+    navigate(MainBottomBarRoute.Favorite, navOptions)
 }
 
 fun NavGraphBuilder.favoriteNavGraph(

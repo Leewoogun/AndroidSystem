@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -39,7 +40,10 @@ import kotlin.math.roundToInt
 internal fun HomeScreen(
     movieList: List<Movie>
 ) {
-    LazyColumn {
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxHeight()
+    ) {
         items(movieList) { movie ->
             SwipeMovieItem(movie)
         }
@@ -68,6 +72,7 @@ private fun SwipeMovieItem(
             MovieCard(
                 modifier = modifier
                     .fillMaxWidth()
+                    .padding(10.dp)
                     .background(color = MaterialTheme.colorScheme.primary)
                     .onGloballyPositioned { coordinate ->
                         movieCardHeight = coordinate.size.height
@@ -118,7 +123,54 @@ private fun HomeScreenPreview() {
                     imageUrlEndPoint = "/9REO1DLpmwhrBJY3mYW5eVxkXFM.jpg",
                     title = "겨울 왕국",
                     genreList = listOf("판타지", "드라마")
-                )
+                ),
+                Movie(
+                    imageUrlEndPoint = "/9REO1DLpmwhrBJY3mYW5eVxkXFM.jpg",
+                    title = "겨울 왕국",
+                    genreList = listOf("판타지", "드라마")
+                ),
+                Movie(
+                    imageUrlEndPoint = "/9REO1DLpmwhrBJY3mYW5eVxkXFM.jpg",
+                    title = "겨울 왕국",
+                    genreList = listOf("판타지", "드라마")
+                ),
+                Movie(
+                    imageUrlEndPoint = "/9REO1DLpmwhrBJY3mYW5eVxkXFM.jpg",
+                    title = "겨울 왕국",
+                    genreList = listOf("판타지", "드라마")
+                ),Movie(
+                    imageUrlEndPoint = "/9REO1DLpmwhrBJY3mYW5eVxkXFM.jpg",
+                    title = "겨울 왕국",
+                    genreList = listOf("판타지", "드라마")
+                ),Movie(
+                    imageUrlEndPoint = "/9REO1DLpmwhrBJY3mYW5eVxkXFM.jpg",
+                    title = "겨울 왕국",
+                    genreList = listOf("판타지", "드라마")
+                ),Movie(
+                    imageUrlEndPoint = "/9REO1DLpmwhrBJY3mYW5eVxkXFM.jpg",
+                    title = "겨울 왕국",
+                    genreList = listOf("판타지", "드라마")
+                ),
+                Movie(
+                    imageUrlEndPoint = "/9REO1DLpmwhrBJY3mYW5eVxkXFM.jpg",
+                    title = "겨울 왕국",
+                    genreList = listOf("판타지", "드라마")
+                ),
+                Movie(
+                    imageUrlEndPoint = "/9REO1DLpmwhrBJY3mYW5eVxkXFM.jpg",
+                    title = "겨울 왕국",
+                    genreList = listOf("판타지", "드라마")
+                ),
+                Movie(
+                    imageUrlEndPoint = "/9REO1DLpmwhrBJY3mYW5eVxkXFM.jpg",
+                    title = "겨울 왕국",
+                    genreList = listOf("판타지", "드라마")
+                ),
+                Movie(
+                    imageUrlEndPoint = "/9REO1DLpmwhrBJY3mYW5eVxkXFM.jpg",
+                    title = "겨울 왕국",
+                    genreList = listOf("판타지", "드라마")
+                ),
             )
         )
     }

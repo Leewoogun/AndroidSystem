@@ -46,7 +46,6 @@ private fun MainScreenContent(
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(paddingValues)
             ) {
                 MainNavHost(
                     navigator = navigator,

@@ -11,7 +11,7 @@ import com.lwg.navigation.MainBottomBarRoute
 fun NavController.navigateToHome(
     navOptions: NavOptions? = null
 ) {
-    navigate(MainBottomBarRoute.Home)
+    navigate(MainBottomBarRoute.Home, navOptions)
 }
 
 fun NavGraphBuilder.homeNavGraph(
