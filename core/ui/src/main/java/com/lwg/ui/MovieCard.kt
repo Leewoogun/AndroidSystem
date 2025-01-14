@@ -15,14 +15,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.lwg.designsystem.component.LwgBalloon
 import com.lwg.designsystem.component.LwgImage
 import com.lwg.designsystem.theme.LwgTheme
+import com.lwg.designsystem.theme.LwgTypo
 
 @Composable
 fun MovieCard(
     imageUrl: String,
     title: String,
     genre: List<String>,
+    balloonText: String,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -52,9 +55,20 @@ fun MovieCard(
 
         Spacer(modifier = Modifier.weight(1f))
 
-        Icon(
-            painter = painterResource(R.drawable.ic_mark),
-            contentDescription = null,
+        LwgBalloon(
+            backgroundColor = MaterialTheme.colorScheme.tertiary,
+            balloonContent = {
+                Text(
+                    text = balloonText,
+                    style = LwgTypo.typography.bodySmallR
+                )
+            },
+            balloonLayout = {
+                Icon(
+                    painter = painterResource(R.drawable.ic_mark),
+                    contentDescription = null,
+                )
+            }
         )
     }
 }
@@ -67,6 +81,7 @@ private fun MovieCardPreview() {
             imageUrl = "https://picsum.photos/200",
             title = "겨울 왕국",
             genre = listOf("판타지", "드라마"),
+            balloonText = "끌어서 즐겨찾기",
             modifier = Modifier
                 .fillMaxWidth()
         )

@@ -19,4 +19,5 @@ dependencies {
     implementation(libs.landscapist.animation)
 
     implementation(libs.androidx.activity.compose)
+    implementation(libs.ballon)
 }
