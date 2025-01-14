@@ -11,7 +11,9 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -38,11 +40,13 @@ import kotlin.math.roundToInt
 
 @Composable
 internal fun HomeScreen(
-    movieList: List<Movie>
+    movieList: List<Movie>,
+    lazyListState: LazyListState
 ) {
     LazyColumn(
         modifier = Modifier
-            .fillMaxHeight()
+            .fillMaxHeight(),
+        state = lazyListState
     ) {
         items(movieList) { movie ->
             SwipeMovieItem(movie)
@@ -119,6 +123,7 @@ private fun SwipeMovieItem(
 private fun HomeScreenPreview() {
     LwgTheme {
         HomeScreen(
+            lazyListState = rememberLazyListState(),
             movieList = listOf(
                 Movie(
                     imageUrlEndPoint = "/9REO1DLpmwhrBJY3mYW5eVxkXFM.jpg",

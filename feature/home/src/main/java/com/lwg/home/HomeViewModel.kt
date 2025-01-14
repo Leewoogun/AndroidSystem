@@ -62,6 +62,10 @@ internal class HomeViewModel @Inject constructor(
         }
     }
 
+    fun nextPage() {
+        moviePage.update { it + 1 }
+    }
+
     fun showSnackBar(message: String) {
         viewModelScope.launch {
             _homeUiEffect.emit(HomeUiEffect.ShowSnackBar(message))
