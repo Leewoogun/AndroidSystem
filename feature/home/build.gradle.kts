@@ -12,4 +12,8 @@ dependencies {
     testImplementation(libs.junit4)
     androidTestImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.espresso.core)
+
+    implementation(projects.core.dataApi)
+    implementation(projects.core.model)
+    implementation(projects.core.ui)
 }

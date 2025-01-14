@@ -3,10 +3,9 @@ package com.lwg.data.util
 import com.lwg.data.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.Response
+import javax.inject.Inject
 
-class ApiInterceptor : Interceptor {
-
-
+class ApiInterceptor @Inject constructor() : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         var request = chain.request()
 

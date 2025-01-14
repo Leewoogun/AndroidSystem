@@ -1,4 +1,4 @@
-package com.lwg.data_api
+package com.lwg.domain
 
 import org.junit.Test
 

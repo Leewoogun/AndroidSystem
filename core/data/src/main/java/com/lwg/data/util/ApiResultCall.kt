@@ -22,9 +22,9 @@ internal class ApiResultCall<R>(
         if (!isSuccessful) {
           val errorBody = errorBody()!!.string()
           return ApiResult.Failure.HttpError(
-              code = code(),
-              message = message(),
-              body = errorBody
+              status_code = code(),
+              status_message = message(),
+              success = isSuccessful
           )
         }
 

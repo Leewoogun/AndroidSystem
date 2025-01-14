@@ -19,6 +19,8 @@ fun NavGraphBuilder.homeNavGraph(
     onShowSnackBar: (String) -> Unit
 ) {
     composable<MainBottomBarRoute.Home> {
-        HomeRoute()
+        HomeRoute(
+            onShowSnackBar = onShowSnackBar
+        )
     }
 }
