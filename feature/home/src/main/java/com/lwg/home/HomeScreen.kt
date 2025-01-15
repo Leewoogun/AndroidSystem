@@ -81,7 +81,7 @@ private fun SwipeMovieItem(
                     .onGloballyPositioned { coordinate ->
                         movieCardHeight = coordinate.size.height
                     },
-                imageUrl = "https://image.tmdb.org/t/p/w500${movie.imageUrlEndPoint}",
+                imageUrl = movie.imageUrl,
                 title = movie.title,
                 genre = movie.genreList,
                 balloonText = stringResource(R.string.balloon_text)
