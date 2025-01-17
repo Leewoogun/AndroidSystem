@@ -1,5 +1,6 @@
 package com.lwg.data.util
 
+import com.lwg.util.Logger
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.InvocationKind
 import kotlin.contracts.contract
@@ -71,6 +72,7 @@ internal inline fun <T> ApiResult<T>.suspendOnFailureWithErrorHandling(
             }
 
             ApiResult.Failure.NetworkError -> {
+                Logger.e("NetworkError - 네트워크 오류가 발생하였습니다.")
                 onError("네트워크 오류가 발생하였습니다. 네트워크를 확인하여 주세요.")
             }
 

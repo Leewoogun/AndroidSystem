@@ -2,8 +2,6 @@ package com.lwg.home
 
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
@@ -16,6 +14,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.lwg.designsystem.component.LwgProgressIndicator
 import com.lwg.home.contract.HomeUiEffect
 import com.lwg.home.contract.HomeUiState
+import com.lwg.model.movie.Movie
 import com.lwg.util.Logger
 
 @Composable
@@ -35,7 +34,8 @@ internal fun HomeRoute(
 
     HomeContent(
         homeUiState = homeUiState,
-        lazyListState = lazyListState
+        lazyListState = lazyListState,
+        onFavoriteClick = viewModel::updateRemoveFavoriteMovie
     )
 
     LaunchedEffect(Unit) {
@@ -57,12 +57,15 @@ internal fun HomeRoute(
             isFirstCheck = false
         }
     }
+
+    Logger.i("recomposition")
 }
 
 @Composable
 private fun HomeContent(
     homeUiState: HomeUiState,
-    lazyListState: LazyListState
+    lazyListState: LazyListState,
+    onFavoriteClick: (Movie) -> Unit
 ) {
     when (homeUiState) {
         HomeUiState.Loading -> { LwgProgressIndicator() }
@@ -70,7 +73,8 @@ private fun HomeContent(
         is HomeUiState.HomeData -> {
             HomeScreen(
                 movieList = homeUiState.movies,
-                lazyListState = lazyListState
+                lazyListState = lazyListState,
+                onFavoriteClick = onFavoriteClick
             )
         }
     }

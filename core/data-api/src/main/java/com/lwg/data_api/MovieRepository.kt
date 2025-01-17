@@ -1,5 +1,6 @@
 package com.lwg.data_api
 
+import com.lwg.model.movie.Genre
 import com.lwg.model.movie.Movie
 import kotlinx.coroutines.flow.Flow
 
@@ -11,5 +12,11 @@ interface MovieRepository {
 
     fun getMovieGenres(
         onError: (String) -> Unit
-    ): Flow<List<String>>
+    ): Flow<List<Genre>>
+
+    suspend fun getFavoriteMovie() : List<Movie>
+
+    suspend fun upsertMovie(movie: Movie)
+
+    suspend fun deleteFavoriteMovie(id: Int)
 }

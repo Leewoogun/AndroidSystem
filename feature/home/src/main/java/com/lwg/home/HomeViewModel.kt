@@ -3,8 +3,11 @@ package com.lwg.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lwg.data_api.MovieRepository
+import com.lwg.domain.GetMovieUseCase
 import com.lwg.home.contract.HomeUiEffect
 import com.lwg.home.contract.HomeUiState
+import com.lwg.model.movie.Movie
+import com.lwg.util.Logger
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -23,9 +26,10 @@ import javax.inject.Inject
 @OptIn(ExperimentalCoroutinesApi::class)
 @HiltViewModel
 internal class HomeViewModel @Inject constructor(
-    private val movieRepository: MovieRepository
+    private val movieRepository: MovieRepository,
+    private val getMovieUseCase: GetMovieUseCase
 ) : ViewModel() {
-    val moviePage = MutableStateFlow(1)
+    private val moviePage = MutableStateFlow(1)
 
     private val _homeUiState = MutableStateFlow<HomeUiState>(HomeUiState.Loading)
     val homeUiState : StateFlow<HomeUiState> = _homeUiState.onStart {
@@ -42,11 +46,12 @@ internal class HomeViewModel @Inject constructor(
     private fun getMovieList() {
         viewModelScope.launch {
             moviePage.flatMapLatest { page ->
-                movieRepository.getTopRatedMovies(
+                getMovieUseCase(
                     page = page,
                     onError = ::showSnackBar
                 )
             }.collectLatest { movies ->
+                Logger.i("flow collect: $movies")
                 _homeUiState.update {
                     when (it) {
                         HomeUiState.Loading -> {
@@ -64,6 +69,45 @@ internal class HomeViewModel @Inject constructor(
 
     fun nextPage() {
         moviePage.update { it + 1 }
+    }
+
+    fun updateRemoveFavoriteMovie(movie: Movie) {
+        val uiState = _homeUiState.value
+        if (uiState !is HomeUiState.HomeData) return
+
+        viewModelScope.launch {
+            if (movie.isFavorite) {
+                movieRepository.deleteFavoriteMovie(movie.movieId)
+                showSnackBar("즐겨찾기에 삭제 되었습니다.")
+
+                _homeUiState.update {
+                    uiState.copy(
+                        movies = uiState.movies.map {
+                            if (it.movieId == movie.movieId) {
+                                it.copy(isFavorite = false)
+                            } else {
+                                it
+                            }
+                        }
+                    )
+                }
+            } else {
+                movieRepository.upsertMovie(movie.copy(isFavorite = true))
+                showSnackBar("즐겨찾기에 추가 되었습니다.")
+
+                _homeUiState.update {
+                    uiState.copy(
+                        movies = uiState.movies.map {
+                            if (it.movieId == movie.movieId) {
+                                it.copy(isFavorite = true)
+                            } else {
+                                it
+                            }
+                        }
+                    )
+                }
+            }
+        }
     }
 
     fun showSnackBar(message: String) {

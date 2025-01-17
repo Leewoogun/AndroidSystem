@@ -31,6 +31,7 @@ dependencies {
     implementation(projects.core.dataApi)
     implementation(projects.core.model)
     implementation(projects.core.util)
+    implementation(projects.core.database)
 
     implementation(libs.retrofit.core)
     implementation(libs.retrofit.kotlin.serialization)

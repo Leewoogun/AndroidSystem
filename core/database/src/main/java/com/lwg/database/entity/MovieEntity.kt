@@ -6,7 +6,7 @@ import com.lwg.database.entity.MovieEntity.Companion.MOVIE_TABLE_NAME
 
 @Entity(tableName = MOVIE_TABLE_NAME)
 data class MovieEntity(
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     val id: Int,
     val imageUrlEndPoint: String,
     val title: String,

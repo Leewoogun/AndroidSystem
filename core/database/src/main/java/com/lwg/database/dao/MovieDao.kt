@@ -9,13 +9,13 @@ import com.lwg.database.entity.MovieEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-internal interface MovieDao {
+interface MovieDao {
     @Upsert
     suspend fun upsertMovie(movieEntity: MovieEntity)
 
-    @Query("SELECT * FROM ${LwgDatabase.DATABASE_NAME}")
-    fun getMovies() : Flow<List<MovieEntity>>
+    @Query("SELECT * FROM ${MovieEntity.MOVIE_TABLE_NAME}")
+    suspend fun getMovies() : List<MovieEntity>
 
-    @Delete
-    suspend fun deleteMovie(movieEntity: MovieEntity)
+    @Query("DELETE FROM ${MovieEntity.MOVIE_TABLE_NAME} WHERE id = :id")
+    suspend fun deleteMovie(id: Int)
 }
