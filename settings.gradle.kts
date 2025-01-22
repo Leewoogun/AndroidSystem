@@ -40,3 +40,5 @@ include(":core:domain")
 include(":core:ui")
 include(":core:util")
 include(":core:database")
+
+include(":feature:movie-detail")

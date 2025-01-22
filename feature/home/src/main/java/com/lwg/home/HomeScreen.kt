@@ -2,6 +2,7 @@ package com.lwg.home
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -38,7 +39,8 @@ import kotlin.math.roundToInt
 internal fun HomeScreen(
     movieList: List<Movie>,
     lazyListState: LazyListState,
-    onFavoriteClick: (Movie) -> Unit
+    onFavoriteClick: (Movie) -> Unit,
+    onMovieClick: (Int) -> Unit
 ) {
     LazyColumn(
         modifier = Modifier
@@ -48,7 +50,8 @@ internal fun HomeScreen(
         items(movieList) { movie ->
             SwipeMovieItem(
                 movie = movie,
-                onFavoriteClick = onFavoriteClick
+                onFavoriteClick = onFavoriteClick,
+                onMovieClick = onMovieClick
             )
         }
     }
@@ -59,6 +62,7 @@ internal fun HomeScreen(
 private fun SwipeMovieItem(
     movie: Movie,
     onFavoriteClick: (Movie) -> Unit,
+    onMovieClick: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val anchoredDraggableState = createAnchoredDraggableState(
@@ -81,6 +85,9 @@ private fun SwipeMovieItem(
                     .background(color = MaterialTheme.colorScheme.primary)
                     .onGloballyPositioned { coordinate ->
                         movieCardHeight = coordinate.size.height
+                    }
+                    .clickable {
+                        onMovieClick(movie.movieId)
                     },
                 imageUrl = movie.imageUrl,
                 title = movie.title,
@@ -170,7 +177,8 @@ private fun HomeScreenPreview() {
                     genreList = listOf("판타지", "드라마")
                 ),
             ),
-            onFavoriteClick = {}
+            onFavoriteClick = {},
+            onMovieClick = {}
         )
     }
 }

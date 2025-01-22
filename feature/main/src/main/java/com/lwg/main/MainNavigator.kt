@@ -13,6 +13,7 @@ import com.lwg.home.navigation.navigateToHome
 import com.lwg.main.component.MainBottomItem
 import com.lwg.navigation.MainBottomBarRoute
 import com.lwg.navigation.Route
+import coml.lwg.movie_detail.navigation.navigateToMovieDetail
 
 internal class MainNavigator(
     val navController: NavHostController
@@ -41,6 +42,12 @@ internal class MainNavigator(
             MainBottomItem.FAVORITE -> navController.navigateToFavorite(navOptions)
             MainBottomItem.CALENDAR -> navController.navigateToCalendar(navOptions)
         }
+    }
+
+    fun navigateToMovieDetail(
+        movieId: Int
+    ) {
+        navController.navigateToMovieDetail(movieId)
     }
 
     private fun popBackStack() {

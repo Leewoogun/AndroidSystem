@@ -16,4 +16,5 @@ dependencies {
     implementation(projects.feature.home)
     implementation(projects.feature.favorite)
     implementation(projects.feature.calendar)
+    implementation(projects.feature.movieDetail)
 }

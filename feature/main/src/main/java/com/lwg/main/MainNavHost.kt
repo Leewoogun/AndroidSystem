@@ -10,6 +10,7 @@ import androidx.navigation.compose.NavHost
 import com.lwg.calendar.navigation.calendarNavGraph
 import com.lwg.favorite.navigation.favoriteNavGraph
 import com.lwg.home.navigation.homeNavGraph
+import coml.lwg.movie_detail.navigation.movieDetailNavGraph
 
 
 @Composable
@@ -30,7 +31,8 @@ internal fun MainNavHost(
         ) {
             homeNavGraph(
                 onBackEvent = {},
-                onShowSnackBar = onShowSnackBar
+                onShowSnackBar = onShowSnackBar,
+                onMovieClick = navigator::navigateToMovieDetail
             )
 
             favoriteNavGraph(
@@ -41,6 +43,10 @@ internal fun MainNavHost(
             calendarNavGraph(
                 onBackEvent = {},
                 onShowSnackBar = onShowSnackBar
+            )
+
+            movieDetailNavGraph(
+
             )
         }
     }

@@ -82,6 +82,8 @@ material = "1.12.0"
 junitKtx = "1.2.1"
 foundationLayoutAndroid = "1.6.8"
 ballon = "1.6.10"
+lifecycleRuntimeKtx = "2.8.7"
+navigationRuntimeKtx = "2.8.5"
 
 [libraries]
 # Gradle
@@ -180,6 +182,9 @@ glance-tools-appwidget-host = { group = "com.google.android.glance.tools", name 
 
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-foundation-layout-android = { group = "androidx.compose.foundation", name = "foundation-layout-android", version.ref = "foundationLayoutAndroid" }
+androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
+androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
+androidx-navigation-runtime-ktx = { group = "androidx.navigation", name = "navigation-runtime-ktx", version.ref = "navigationRuntimeKtx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }

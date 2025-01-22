@@ -20,7 +20,8 @@ import com.lwg.util.Logger
 @Composable
 internal fun HomeRoute(
     viewModel: HomeViewModel = hiltViewModel(),
-    onShowSnackBar: (String) -> Unit
+    onShowSnackBar: (String) -> Unit,
+    onMovieClick: (Int) -> Unit
 ) {
 
     val homeUiState by viewModel.homeUiState.collectAsStateWithLifecycle()
@@ -35,7 +36,8 @@ internal fun HomeRoute(
     HomeContent(
         homeUiState = homeUiState,
         lazyListState = lazyListState,
-        onFavoriteClick = viewModel::updateRemoveFavoriteMovie
+        onFavoriteClick = viewModel::updateRemoveFavoriteMovie,
+        onMovieClick = onMovieClick
     )
 
     LaunchedEffect(Unit) {
@@ -57,15 +59,14 @@ internal fun HomeRoute(
             isFirstCheck = false
         }
     }
-
-    Logger.i("recomposition")
 }
 
 @Composable
 private fun HomeContent(
     homeUiState: HomeUiState,
     lazyListState: LazyListState,
-    onFavoriteClick: (Movie) -> Unit
+    onFavoriteClick: (Movie) -> Unit,
+    onMovieClick: (Int) -> Unit
 ) {
     when (homeUiState) {
         HomeUiState.Loading -> { LwgProgressIndicator() }
@@ -74,7 +75,8 @@ private fun HomeContent(
             HomeScreen(
                 movieList = homeUiState.movies,
                 lazyListState = lazyListState,
-                onFavoriteClick = onFavoriteClick
+                onFavoriteClick = onFavoriteClick,
+                onMovieClick = onMovieClick
             )
         }
     }

@@ -15,33 +15,37 @@ import com.lwg.main.MainNavigator
 
 @Composable
 internal fun MainBottomBar(
-    navigator: MainNavigator
+    navigator: MainNavigator,
+    isVisible: Boolean
 ) {
     val bottomBarItems = listOf(MainBottomItem.HOME, MainBottomItem.FAVORITE, MainBottomItem.CALENDAR)
 
-    NavigationBar {
-        bottomBarItems.forEach { item ->
-            NavigationBarItem(
-                selected = item == navigator.currentTab,
-                onClick = { navigator.navigate(item) },
-                icon = { BottomIcon(item.iconResId) },
-                label = {
-                    Text(
-                        text = item.title
+    if (isVisible) {
+        NavigationBar {
+            bottomBarItems.forEach { item ->
+                NavigationBarItem(
+                    selected = item == navigator.currentTab,
+                    onClick = { navigator.navigate(item) },
+                    icon = { BottomIcon(item.iconResId) },
+                    label = {
+                        Text(
+                            text = item.title
+                        )
+                    },
+                    colors = NavigationBarItemColors(
+                        selectedIconColor = MaterialTheme.colorScheme.primary,
+                        selectedTextColor = MaterialTheme.colorScheme.primary,
+                        selectedIndicatorColor = MaterialTheme.colorScheme.primaryContainer,
+                        unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                        unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                        disabledIconColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f),
+                        disabledTextColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
                     )
-                },
-                colors = NavigationBarItemColors(
-                    selectedIconColor = MaterialTheme.colorScheme.primary,
-                    selectedTextColor = MaterialTheme.colorScheme.primary,
-                    selectedIndicatorColor = MaterialTheme.colorScheme.primaryContainer,
-                    unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                    unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                    disabledIconColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f),
-                    disabledTextColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
                 )
-            )
+            }
         }
     }
+
 }
 
 @Composable
@@ -61,7 +65,8 @@ private fun MainBottomBarPreview() {
         MainBottomBar(
             navigator = MainNavigator(
                 rememberNavController()
-            )
+            ),
+            isVisible = true
         )
     }
 }

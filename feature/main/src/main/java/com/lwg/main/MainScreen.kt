@@ -61,7 +61,10 @@ private fun MainScreenContent(
             }
         },
         bottomBar = {
-            MainBottomBar(navigator)
+            MainBottomBar(
+                navigator = navigator,
+                isVisible = navigator.shouldShowBottomBar()
+            )
         },
         snackbarHost = {
             SnackbarHost(

@@ -16,11 +16,13 @@ fun NavController.navigateToHome(
 
 fun NavGraphBuilder.homeNavGraph(
     onBackEvent: () -> Unit,
-    onShowSnackBar: (String) -> Unit
+    onShowSnackBar: (String) -> Unit,
+    onMovieClick: (Int) -> Unit
 ) {
     composable<MainBottomBarRoute.Home> {
         HomeRoute(
-            onShowSnackBar = onShowSnackBar
+            onShowSnackBar = onShowSnackBar,
+            onMovieClick = onMovieClick
         )
     }
 }
