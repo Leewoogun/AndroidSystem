@@ -26,7 +26,6 @@ fun LwgTopAppBar(
     modifier: Modifier = Modifier,
     colors: TopAppBarColors = TopAppBarDefaults.topAppBarColors(),
     topBarIcon: @Composable () -> Unit = {},
-
 ) {
     TopAppBar(
         modifier = modifier,

@@ -1,6 +1,7 @@
 package com.lwg.main
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.imePadding
@@ -12,6 +13,7 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.lwg.main.component.MainBottomBar
 import com.lwg.main.component.NetworkConnectionBox
 
@@ -40,7 +42,6 @@ private fun MainScreenContent(
     Scaffold(
         modifier = Modifier
             .fillMaxSize()
-            .statusBarsPadding()
             .navigationBarsPadding(),
         content = { paddingValues ->
             Box(
@@ -72,6 +73,7 @@ private fun MainScreenContent(
                 modifier = Modifier
                     .imePadding()
             )
-        }
+        },
+        contentWindowInsets = WindowInsets(0.dp)
     )
 }
