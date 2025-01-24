@@ -1,6 +1,7 @@
 package com.lwg.data.di
 
 import com.lwg.data.api.MovieApi
+import com.lwg.data.api.MovieDetailApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,5 +17,11 @@ internal object ApiModule {
     @Singleton
     fun providesMovieApi(retrofit: Retrofit): MovieApi {
         return retrofit.create(MovieApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideMovieDetailApi(retrofit: Retrofit) : MovieDetailApi {
+        return retrofit.create(MovieDetailApi::class.java)
     }
 }

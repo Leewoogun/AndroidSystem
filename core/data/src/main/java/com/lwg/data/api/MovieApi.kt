@@ -1,9 +1,12 @@
 package com.lwg.data.api
 
 import com.lwg.data.model.GenreListResponse
+import com.lwg.data.model.MovieDetailResponse
+import com.lwg.data.model.MovieReviewsResponse
 import com.lwg.data.model.TopRatedMovieResponse
 import com.lwg.data.util.ApiResult
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 internal interface MovieApi {

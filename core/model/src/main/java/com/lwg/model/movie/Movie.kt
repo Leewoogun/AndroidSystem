@@ -1,5 +1,7 @@
 package com.lwg.model.movie
 
+import com.lwg.model.Constants
+
 data class Movie(
     val movieId: Int = 0,
     val imageUrlEndPoint: String,
@@ -8,5 +10,5 @@ data class Movie(
     val isFavorite: Boolean = false
 ) {
     val imageUrl: String
-        get() = "https://image.tmdb.org/t/p/w500$imageUrlEndPoint"
+        get() = Constants.BASE_IMAGE_URL + imageUrlEndPoint
 }
