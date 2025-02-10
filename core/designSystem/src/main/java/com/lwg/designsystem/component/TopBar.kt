@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -17,7 +16,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarColors
 import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.rememberTopAppBarState
+import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -86,10 +85,9 @@ fun LwgCollapsingImageTopAppBar(
     imageHeight: Dp = 300.dp,
     colors: TopAppBarColors = TopAppBarDefaults.topAppBarColors(),
     topBarIcon: @Composable () -> Unit = {},
-    actions: @Composable RowScope.() -> Unit = {}
+    actions: @Composable RowScope.() -> Unit = {},
+    scrollBehavior: TopAppBarScrollBehavior? = null
 ) {
-    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
-
     LargeTopAppBar(
         title = {
             Box(
@@ -98,8 +96,7 @@ fun LwgCollapsingImageTopAppBar(
             ) {
                 LwgImage(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .height(imageHeight),
+                        .fillMaxWidth(),
                     imageUrl = backgroundImagePath
                 )
             }

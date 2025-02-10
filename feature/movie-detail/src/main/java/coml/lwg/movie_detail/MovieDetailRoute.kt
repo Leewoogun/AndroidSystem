@@ -1,51 +1,42 @@
 package coml.lwg.movie_detail
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
+import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.lwg.designsystem.component.LwgTopAppBar
-import com.lwg.designsystem.theme.main
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.lwg.designsystem.component.LwgProgressIndicator
+import com.lwg.designsystem.theme.IsChangeStatusBarWhite
+import coml.lwg.movie_detail.contract.MovieDetailUiState
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
 internal fun MovieDetailRoute(
     viewModel: MovieDetailViewModel = hiltViewModel(),
 ) {
-    Scaffold(
-        topBar = {
-            LwgTopAppBar(
-                title = "영화 상세",
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = main)
-            )
-        },
-        content = { paddingValues ->
-            Column(
-                modifier = Modifier
-                    .padding(paddingValues)
-            ) {
-                Text(text = "나는 영화 상세 본문")
-            }
-        }
+    val movieDetailUiState by viewModel.movieDetailUiState.collectAsStateWithLifecycle()
+
+    MovieDetailContent(
+        movieDetailUiState = movieDetailUiState
+    )
+
+    IsChangeStatusBarWhite(
+        isWhite = true
     )
 }
 
-//    Column {
-//        Box(
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .height(100.dp)
-//                .background(color = main)
-//                .windowInsetsPadding(WindowInsets.statusBars)
-//        ) {
-//            Text(
-//                text = "테스트"
-//            )
-//        }
-//    }
+@Composable
+private fun MovieDetailContent(
+    movieDetailUiState: MovieDetailUiState
+) {
+    when (movieDetailUiState) {
+        MovieDetailUiState.Loading -> {  }
+        is MovieDetailUiState.MovieDetailData -> {
+            MovieDetailScreen(
+                movieDetailUiState = movieDetailUiState
+            )
+        }
+    }
+}
+

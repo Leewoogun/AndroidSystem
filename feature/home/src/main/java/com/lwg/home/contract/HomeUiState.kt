@@ -1,14 +1,15 @@
 package com.lwg.home.contract
 
+import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
 import com.lwg.model.movie.Movie
 
 @Stable
 internal sealed interface HomeUiState {
-    @Stable
+    @Immutable
     data object Loading: HomeUiState
 
-    @Stable
+    @Immutable
     data class HomeData(
         val movies: List<Movie>
     ) : HomeUiState

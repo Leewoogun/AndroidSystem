@@ -2,6 +2,7 @@ package com.lwg.designsystem.theme
 
 import android.app.Activity
 import android.os.Build
+import android.view.WindowInsets.Side
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.lightColorScheme
@@ -301,6 +302,18 @@ fun ChangeStatusBarColor(
         val window = (view.context as Activity).window
         window.statusBarColor = color.toArgb()
         WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !darkTheme
+    }
+}
+
+@Composable
+fun IsChangeStatusBarWhite(
+    isWhite: Boolean
+) {
+    val view = LocalView.current
+
+    SideEffect {
+        val window = (view.context as Activity).window
+        WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !isWhite
     }
 }
 
