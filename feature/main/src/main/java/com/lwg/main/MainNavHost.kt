@@ -47,7 +47,7 @@ internal fun MainNavHost(
             )
 
             movieDetailNavGraph(
-
+                onBackEvent = navigator::popBackStackIfNotHome
             )
         }
     }

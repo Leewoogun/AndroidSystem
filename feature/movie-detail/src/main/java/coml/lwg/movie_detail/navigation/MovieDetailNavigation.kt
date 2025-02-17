@@ -15,11 +15,11 @@ fun NavController.navigateToMovieDetail(
 }
 
 fun NavGraphBuilder.movieDetailNavGraph(
-
+    onBackEvent: () -> Unit
 ) {
     composable<Route.Detail> {
         MovieDetailRoute(
-
+            onBackEvent = onBackEvent
         )
     }
 }

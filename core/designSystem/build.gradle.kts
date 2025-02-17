@@ -20,4 +20,6 @@ dependencies {
 
     implementation(libs.androidx.activity.compose)
     implementation(libs.ballon)
+
+    implementation(projects.core.util)
 }

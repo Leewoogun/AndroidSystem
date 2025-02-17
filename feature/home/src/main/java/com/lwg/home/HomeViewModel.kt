@@ -51,7 +51,6 @@ internal class HomeViewModel @Inject constructor(
                     onError = ::showSnackBar
                 )
             }.collectLatest { movies ->
-                Logger.i("flow collect: $movies")
                 _homeUiState.update {
                     when (it) {
                         HomeUiState.Loading -> {

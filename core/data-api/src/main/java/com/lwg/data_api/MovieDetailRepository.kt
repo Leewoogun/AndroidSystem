@@ -1,5 +1,6 @@
 package com.lwg.data_api
 
+import com.lwg.model.movie.Genre
 import com.lwg.model.movie.MovieDetail
 import com.lwg.model.movie.Review
 import kotlinx.coroutines.flow.Flow
@@ -15,4 +16,8 @@ interface MovieDetailRepository {
         page: Int,
         onError: (String) -> Unit
     ) : Flow<Review>
+
+    fun getMovieGenres(
+        onError: (String) -> Unit
+    ): Flow<List<Genre>>
 }

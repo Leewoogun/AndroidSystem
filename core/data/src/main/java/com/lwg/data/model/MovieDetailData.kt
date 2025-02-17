@@ -8,4 +8,5 @@ internal data class MovieDetailResponse(
     val overview: String = "",
     val poster_path: String = "",
     val vote_average: Double = 0.0,
+    val genres: List<GenreListResponse.GenreData> = emptyList()
 )

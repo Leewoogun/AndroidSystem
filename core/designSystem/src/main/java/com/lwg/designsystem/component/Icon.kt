@@ -4,6 +4,7 @@ import androidx.annotation.DrawableRes
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -17,6 +18,7 @@ import com.lwg.designsystem.theme.LwgTheme
 fun LwgIcon(
     modifier: Modifier,
     iconType: IconType,
+    iconColor: Color = Color.Unspecified,
     onClick: () -> Unit = {}
 ) {
     Box(
@@ -31,7 +33,7 @@ fun LwgIcon(
                 Icon(
                     painter = painterResource(id = iconType.iconRes),
                     contentDescription = null,
-                    tint = Color.Unspecified
+                    tint = iconColor
                 )
             }
 
@@ -39,7 +41,7 @@ fun LwgIcon(
                 Icon(
                     imageVector = iconType.imageVector,
                     contentDescription = null,
-                    tint = Color.Unspecified
+                    tint = iconColor
                 )
             }
         }
@@ -57,7 +59,7 @@ private fun LwgIconPreview() {
     LwgTheme {
         LwgIcon(
             modifier = Modifier,
-            iconType = IconType.Default(R.drawable.ic_favorite_color)
+            iconType = IconType.Default(R.drawable.ic_favorite_color),
         )
     }
 }

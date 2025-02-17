@@ -16,6 +16,7 @@ internal interface MovieDetailApi {
     @GET("movie/{movie_id}/reviews")
     suspend fun getMovieReviews(
         @Path("movie_id") movieId: Int,
+        @Query("language") language: String = "en-US",
         @Query("page") page: Int
     ) : ApiResult<MovieReviewsResponse>
 }

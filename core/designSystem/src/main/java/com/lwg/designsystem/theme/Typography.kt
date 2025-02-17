@@ -1,12 +1,27 @@
 package com.lwg.designsystem.theme
 
 import androidx.compose.material3.Typography
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.ReadOnlyComposable
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 
-val AppTypography = Typography()
+val TextUnit.nonScaledSp
+    @Composable
+    @ReadOnlyComposable
+    get() = (this.value / LocalDensity.current.fontScale).sp
+
+val TextStyle.nonScaledSp
+    @Composable
+    @ReadOnlyComposable
+    get() = this.copy(
+        fontSize = this.fontSize.nonScaledSp,
+        lineHeight = this.lineHeight.nonScaledSp
+    )
 
 val Typography = LwgTypography(
     displayLargeB = TextStyle(

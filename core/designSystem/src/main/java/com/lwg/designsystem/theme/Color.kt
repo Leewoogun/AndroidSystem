@@ -226,6 +226,9 @@ val Gray1 = Color(0xFFC2C2C2)
 val White = Color(0xFFFFFFFF)
 
 val Black = Color(0xFF000000)
+val BlackA20 = Color(0x20FFFFFF)
+
+val Yellow = Color(0xFFFFC700)
 
 
 

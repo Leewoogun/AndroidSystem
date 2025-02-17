@@ -6,7 +6,8 @@ data class MovieDetail(
     val movieTitle: String,
     val overview: String,
     val posterPathEndPoint: String,
-    val voteAverage: Double
+    val voteAverage: Double,
+    val genres: List<Genre>
 ) {
     val posterImageUrl: String
         get() = Constants.BASE_IMAGE_URL + posterPathEndPoint

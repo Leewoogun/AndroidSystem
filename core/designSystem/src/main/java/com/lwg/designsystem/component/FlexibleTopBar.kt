@@ -24,6 +24,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -35,6 +36,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.Velocity
 import androidx.compose.ui.unit.dp
+import com.lwg.util.Logger
 import kotlin.math.abs
 import kotlin.math.ln
 import kotlin.math.roundToInt
@@ -51,6 +53,8 @@ fun FlexibleTopBar(
     colors: FlexibleTopBarColors = FlexibleTopBarDefaults.topAppBarColors(),
     scrollBehavior: TopAppBarScrollBehavior? = null,
     topAppBarHeight: Float = with(LocalDensity.current) { 64.dp.toPx() },
+    onCollapsed: () -> Unit = {},
+    onExpanded: () -> Unit = {},
     content: @Composable () -> Unit,
 ) {
     // Sets the app bar's height offset to collapse the entire bar's height when content is
@@ -58,13 +62,22 @@ fun FlexibleTopBar(
     var heightOffsetLimit by remember {
         mutableFloatStateOf(0f)
     }
+
+    var isCollapsed by remember {
+        mutableStateOf(false)
+    }
     LaunchedEffect(heightOffsetLimit) {
         if (scrollBehavior?.state?.heightOffsetLimit != heightOffsetLimit) {
             scrollBehavior?.state?.heightOffsetLimit = heightOffsetLimit
         }
     }
 
-    val isImageHideHeight = (scrollBehavior?.state?.heightOffsetLimit ?: 0f) <= -topAppBarHeight
+    isCollapsed = (scrollBehavior?.state?.heightOffset ?: 0f) <= heightOffsetLimit + topAppBarHeight
+
+    LaunchedEffect(isCollapsed)  {
+        if (isCollapsed) onCollapsed()
+        else onExpanded()
+    }
 
     // Obtain the container color from the TopAppBarColors using the `overlapFraction`. This
     // ensures that the colors will adjust whether the app bar behavior is pinned or scrolled.
@@ -89,7 +102,7 @@ fun FlexibleTopBar(
                     scrollBehavior.state,
                     velocity,
                     scrollBehavior.flingAnimationSpec,
-                    scrollBehavior.snapAnimationSpec
+                    scrollBehavior.snapAnimationSpec,
                 )
             }
         )
@@ -124,7 +137,7 @@ private suspend fun settleAppBar(
     state: TopAppBarState,
     velocity: Float,
     flingAnimationSpec: DecayAnimationSpec<Float>?,
-    snapAnimationSpec: AnimationSpec<Float>?
+    snapAnimationSpec: AnimationSpec<Float>?,
 ): Velocity {
     // Check if the app bar is completely collapsed/expanded. If so, no need to settle the app bar,
     // and just return Zero Velocity.

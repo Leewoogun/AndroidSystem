@@ -7,5 +7,6 @@ internal fun MovieDetailResponse.toMovieDetail() = MovieDetail(
     movieTitle = original_title,
     overview = overview,
     posterPathEndPoint = poster_path,
-    voteAverage = vote_average
+    voteAverage = vote_average,
+    genres = genres.map { it.toGenre() }
 )

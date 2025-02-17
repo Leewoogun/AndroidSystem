@@ -20,5 +20,5 @@ internal fun MovieReviewsResponse.ReviewData.toReviewInfo() = ReviewInfo(
         profilePath = author_details.avatar_path
     ),
     content = content,
-    rating = author_details.rating
+    rating = author_details.rating ?: 0.0
 )

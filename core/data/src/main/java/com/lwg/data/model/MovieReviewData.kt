@@ -20,6 +20,6 @@ internal data class MovieReviewsResponse(
 internal data class AuthorDetailData(
     val name: String,
     val username: String,
-    val avatar_path: String,
-    val rating: Double
+    val avatar_path: String? = null,
+    val rating: Double? = null
 )

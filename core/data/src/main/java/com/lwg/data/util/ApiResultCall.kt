@@ -1,5 +1,6 @@
 package com.lwg.data.util
 
+import com.lwg.util.Logger
 import kotlinx.coroutines.CoroutineScope
 import retrofit2.Call
 import retrofit2.Callback
@@ -27,8 +28,9 @@ internal class ApiResultCall<R>(
               success = isSuccessful
           )
         }
-
-        body()?.let { body -> return ApiResult.Success(body) }
+        body()?.let { body ->
+            return ApiResult.Success(body)
+        }
 
         return ApiResult.Failure.UnknownApiError(
             IllegalStateException(
