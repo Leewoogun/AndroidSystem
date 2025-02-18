@@ -43,7 +43,6 @@ internal class MovieDetailRepositoryImpl @Inject constructor(
         )
             .suspendOnFailureWithErrorHandling(onError)
         .suspendOnSuccess {
-            Logger.i("emit 되니?")
             emit(
                 response.toReview()
             )

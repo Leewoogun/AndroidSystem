@@ -84,6 +84,7 @@ foundationLayoutAndroid = "1.6.8"
 ballon = "1.6.10"
 lifecycleRuntimeKtx = "2.8.7"
 navigationRuntimeKtx = "2.8.5"
+biometric = "1.4.0-alpha02"
 
 [libraries]
 # Gradle
@@ -93,6 +94,7 @@ kotlin-gradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", ve
 
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "androidxCore" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "androidxAppCompat" }
+androidx-biometric = { group = "androidx.biometric", name = "biometric-ktx", version.ref = "biometric" }
 
 # Compose
 androidx-lifecycle-runtimeCompose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidxLifecycle" }

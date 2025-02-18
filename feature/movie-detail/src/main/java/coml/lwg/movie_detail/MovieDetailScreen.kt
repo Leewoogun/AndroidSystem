@@ -117,14 +117,13 @@ internal fun MovieDetailScreen(
                     topBarIcon = {
                         Box(
                             modifier = Modifier
+                                .clickable {
+                                    onBackEvent()
+                                }
                                 .padding(16.dp),
                             contentAlignment = Alignment.Center
                         ) {
                             Icon(
-                                modifier = Modifier
-                                    .clickable {
-                                        onBackEvent()
-                                    },
                                 imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                                 contentDescription = null,
                             )

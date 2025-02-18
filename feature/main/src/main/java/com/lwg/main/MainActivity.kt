@@ -1,14 +1,13 @@
 package com.lwg.main
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.lwg.designsystem.theme.LwgTheme
@@ -19,7 +18,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainActivity: ComponentActivity() {
+class MainActivity: FragmentActivity() {
 
     @Inject
     lateinit var networkManager: NetworkManager
@@ -42,6 +41,7 @@ class MainActivity: ComponentActivity() {
                     )
                 }
             }
+
             LwgTheme {
                 MainScreen(
                     navigator = navigator,

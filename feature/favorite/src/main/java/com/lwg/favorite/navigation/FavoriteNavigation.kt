@@ -15,9 +15,10 @@ fun NavController.navigateToFavorite(
 
 fun NavGraphBuilder.favoriteNavGraph(
     onBackEvent: () -> Unit,
-    onShowSnackBar: (String) -> Unit
+    onShowSnackBar: (String) -> Unit,
 ) {
     composable<MainBottomBarRoute.Favorite> {
-        FavoriteRoute()
+        FavoriteRoute(
+        )
     }
 }
