@@ -14,7 +14,7 @@ interface MovieDao {
     suspend fun upsertMovie(movieEntity: MovieEntity)
 
     @Query("SELECT * FROM ${MovieEntity.MOVIE_TABLE_NAME}")
-    suspend fun getMovies() : List<MovieEntity>
+    fun getMovies() : Flow<List<MovieEntity>>
 
     @Query("DELETE FROM ${MovieEntity.MOVIE_TABLE_NAME} WHERE id = :id")
     suspend fun deleteMovie(id: Int)

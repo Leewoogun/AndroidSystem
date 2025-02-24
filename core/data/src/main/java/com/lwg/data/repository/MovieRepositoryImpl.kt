@@ -49,9 +49,9 @@ internal class MovieRepositoryImpl @Inject constructor(
             .suspendOnSuccess { emit(response.genres.map { it.toGenre() }) }
     }
 
-    override suspend fun getFavoriteMovie(): List<Movie> {
-        return movieDao.getMovies().map { movieEntity ->
-            movieEntity.toMovie()
+    override fun getFavoriteMovie(): Flow<List<Movie>> {
+        return movieDao.getMovies().map { movieEntities ->
+            movieEntities.map { it.toMovie() }
         }
     }
 

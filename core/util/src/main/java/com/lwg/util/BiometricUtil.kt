@@ -63,7 +63,7 @@ class BiometricUtil(
         )
 
         val promptInfo = BiometricPrompt.PromptInfo.Builder()
-            .setTitle("생체 인증로 인증해주세요")
+            .setTitle("생체 정보로 인증해주세요")
             .setNegativeButtonText("다음에 인증")
             .build()
 

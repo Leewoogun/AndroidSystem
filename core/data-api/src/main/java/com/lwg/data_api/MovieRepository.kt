@@ -14,7 +14,7 @@ interface MovieRepository {
         onError: (String) -> Unit
     ): Flow<List<Genre>>
 
-    suspend fun getFavoriteMovie() : List<Movie>
+    fun getFavoriteMovie() : Flow<List<Movie>>
 
     suspend fun upsertMovie(movie: Movie)
 

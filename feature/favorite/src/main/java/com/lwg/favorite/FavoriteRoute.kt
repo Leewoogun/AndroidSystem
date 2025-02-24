@@ -1,7 +1,5 @@
 package com.lwg.favorite
 
-import android.app.Activity
-import androidx.activity.ComponentActivity
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
