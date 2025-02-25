@@ -38,8 +38,7 @@ internal enum class MainBottomItem(
             return entries.find { predicate(it.route) }
         }
 
-        @Composable
-        fun contains(predicate: @Composable (Route) -> Boolean): Boolean {
+        fun contains(predicate: (Route) -> Boolean): Boolean {
             return entries.map { it.route }.any { predicate(it) }
         }
     }

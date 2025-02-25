@@ -47,5 +47,7 @@ private fun FavoriteContent(
         FavoriteUiState.Lock -> {
             Text("I'm favorite")
         }
+
+        is FavoriteUiState.Movies -> TODO()
     }
 }

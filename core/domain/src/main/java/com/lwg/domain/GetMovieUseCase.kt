@@ -10,7 +10,6 @@ import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-@OptIn(ExperimentalCoroutinesApi::class)
 class GetMovieUseCase @Inject constructor(
     private val movieRepository: MovieRepository
 ) {
@@ -18,19 +17,17 @@ class GetMovieUseCase @Inject constructor(
         page: Int,
         onError: (String) -> Unit
     ): Flow<List<Movie>> {
-        return movieRepository.getTopRatedMovies(page, onError)
-            .flatMapLatest { movies ->
-                flow {
-                    val favoriteMovies = movieRepository.getFavoriteMovie()
-
-                    val updatedMovies = movies.map { movie ->
-                        val favorite = favoriteMovies.find { it.movieId == movie.movieId }
-                        favorite?.let {
-                            movie.copy(isFavorite = it.isFavorite)
-                        } ?: movie.copy(isFavorite = false)
-                    }
-                    emit(updatedMovies)
-                }
+        return combine(
+            movieRepository.getTopRatedMovies(page, onError),
+            movieRepository.getFavoriteMovie()
+        ) { movies, favoriteMovies ->
+            val updatedMovies = movies.map { movie ->
+                val favorite = favoriteMovies.find { it.movieId == movie.movieId }
+                favorite?.let {
+                    movie.copy(isFavorite = it.isFavorite)
+                } ?: movie.copy(isFavorite = false)
             }
+            updatedMovies
+        }
     }
 }

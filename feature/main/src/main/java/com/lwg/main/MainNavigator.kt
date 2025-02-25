@@ -1,6 +1,11 @@
 package com.lwg.main
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.produceState
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -13,13 +18,17 @@ import com.lwg.home.navigation.navigateToHome
 import com.lwg.main.component.MainBottomItem
 import com.lwg.navigation.MainBottomBarRoute
 import com.lwg.navigation.Route
+import com.lwg.util.Logger
 import coml.lwg.movie_detail.navigation.navigateToMovieDetail
 
 internal class MainNavigator(
     val navController: NavHostController
 ) {
-    private val currentDestination: NavDestination?
-        @Composable get() = navController.currentBackStackEntryAsState().value?.destination
+    val currentDestination: NavDestination?
+        @Composable get() {
+            val backStackEntry by navController.currentBackStackEntryAsState()
+            return remember(backStackEntry) { backStackEntry?.destination }
+        }
 
     val startDestination = MainBottomItem.HOME.route
 
@@ -65,7 +74,15 @@ internal class MainNavigator(
     }
 
     @Composable
-    fun shouldShowBottomBar() = MainBottomItem.contains {
-        currentDestination?.hasRoute(it::class) == true
+    fun shouldShowBottomBar(): Boolean {
+        val destination by rememberUpdatedState(newValue = currentDestination) // ✅ 최신 값 유지
+
+        val showBottomBar by remember(destination) { // ✅ destination 변경 시 업데이트
+            mutableStateOf(MainBottomItem.contains {
+                destination?.hasRoute(it::class) == true
+            })
+        }
+
+        return showBottomBar
     }
 }
