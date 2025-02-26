@@ -49,8 +49,18 @@ sealed interface FavoriteUiState {
             ),
         )
     ): FavoriteUiState {
+        val filteredMovieList: List<Movie>
+            get() {
+                val selectedGenres = genreChipList.filter { it.isSelected }.map { it.id }
 
+                // "전체"가 선택된 경우 모든 영화 반환
+                if (selectedGenres.contains(0)) return movieList
 
+                return movieList.filter { movie ->
+                    movie.genreList.any { genre ->
+                        genre.id in selectedGenres
+                    }
+                }
+            }
     }
-
 }

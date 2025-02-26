@@ -9,7 +9,7 @@ internal fun TopRatedMovieResponse.MovieData.toMovie(genre: List<Genre>) : Movie
     movieId = id,
     imageUrlEndPoint = poster_path,
     title = title,
-    genreList = genre.filter { it.id in genre_ids }.map { it.name },
+    genreList = genre.filter { it.id in genre_ids },
 )
 
 internal fun MovieEntity.toMovie(): Movie = Movie(

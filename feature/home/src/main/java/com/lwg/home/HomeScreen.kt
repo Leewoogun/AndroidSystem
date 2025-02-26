@@ -91,7 +91,7 @@ private fun SwipeMovieItem(
                     },
                 imageUrl = movie.imageUrl,
                 title = movie.title,
-                genre = movie.genreList,
+                genre = movie.genreList.map { it.name },
                 balloonText = stringResource(R.string.balloon_text)
             )
         },
@@ -127,54 +127,54 @@ private fun HomeScreenPreview() {
                 Movie(
                     imageUrlEndPoint = "/9REO1DLpmwhrBJY3mYW5eVxkXFM.jpg",
                     title = "겨울 왕국",
-                    genreList = listOf("판타지", "드라마")
+                    genreList = listOf()
                 ),
                 Movie(
                     imageUrlEndPoint = "/9REO1DLpmwhrBJY3mYW5eVxkXFM.jpg",
                     title = "겨울 왕국",
-                    genreList = listOf("판타지", "드라마")
+                    genreList = listOf()
                 ),
                 Movie(
                     imageUrlEndPoint = "/9REO1DLpmwhrBJY3mYW5eVxkXFM.jpg",
                     title = "겨울 왕국",
-                    genreList = listOf("판타지", "드라마")
+                    genreList = listOf()
                 ),
                 Movie(
                     imageUrlEndPoint = "/9REO1DLpmwhrBJY3mYW5eVxkXFM.jpg",
                     title = "겨울 왕국",
-                    genreList = listOf("판타지", "드라마")
+                    genreList = listOf()
                 ),Movie(
                     imageUrlEndPoint = "/9REO1DLpmwhrBJY3mYW5eVxkXFM.jpg",
                     title = "겨울 왕국",
-                    genreList = listOf("판타지", "드라마")
+                    genreList = listOf()
                 ),Movie(
                     imageUrlEndPoint = "/9REO1DLpmwhrBJY3mYW5eVxkXFM.jpg",
                     title = "겨울 왕국",
-                    genreList = listOf("판타지", "드라마")
+                    genreList = listOf()
                 ),Movie(
                     imageUrlEndPoint = "/9REO1DLpmwhrBJY3mYW5eVxkXFM.jpg",
                     title = "겨울 왕국",
-                    genreList = listOf("판타지", "드라마")
+                    genreList = listOf()
                 ),
                 Movie(
                     imageUrlEndPoint = "/9REO1DLpmwhrBJY3mYW5eVxkXFM.jpg",
                     title = "겨울 왕국",
-                    genreList = listOf("판타지", "드라마")
+                    genreList = listOf()
                 ),
                 Movie(
                     imageUrlEndPoint = "/9REO1DLpmwhrBJY3mYW5eVxkXFM.jpg",
                     title = "겨울 왕국",
-                    genreList = listOf("판타지", "드라마")
+                    genreList = listOf()
                 ),
                 Movie(
                     imageUrlEndPoint = "/9REO1DLpmwhrBJY3mYW5eVxkXFM.jpg",
                     title = "겨울 왕국",
-                    genreList = listOf("판타지", "드라마")
+                    genreList = listOf()
                 ),
                 Movie(
                     imageUrlEndPoint = "/9REO1DLpmwhrBJY3mYW5eVxkXFM.jpg",
                     title = "겨울 왕국",
-                    genreList = listOf("판타지", "드라마")
+                    genreList = listOf()
                 ),
             ),
             onFavoriteClick = {},

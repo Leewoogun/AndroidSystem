@@ -3,7 +3,10 @@ package com.lwg.database
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.lwg.database.LwgDatabase.Companion.DATABASE_VERSION
+import com.lwg.database.converter.GenreTypeConverter
 import com.lwg.database.converter.ListTypeConverter
 import com.lwg.database.dao.MovieDao
 import com.lwg.database.entity.MovieEntity
@@ -18,9 +21,10 @@ import com.lwg.database.entity.MovieEntity
 @TypeConverters(
     value = [
         ListTypeConverter::class,
+        GenreTypeConverter::class
     ]
 )
-internal abstract class LwgDatabase: RoomDatabase() {
+internal abstract class LwgDatabase : RoomDatabase() {
     abstract fun movieDao(): MovieDao
 
     companion object {
