@@ -3,7 +3,6 @@ package com.lwg.main
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.navigation.NavDestination
@@ -18,7 +17,6 @@ import com.lwg.home.navigation.navigateToHome
 import com.lwg.main.component.MainBottomItem
 import com.lwg.navigation.MainBottomBarRoute
 import com.lwg.navigation.Route
-import com.lwg.util.Logger
 import coml.lwg.movie_detail.navigation.navigateToMovieDetail
 
 internal class MainNavigator(
@@ -40,10 +38,10 @@ internal class MainNavigator(
     fun navigate(bottomItem: MainBottomItem) {
         val navOptions = navOptions {
             popUpTo(navController.graph.findStartDestination().id) {
-                saveState = true
+                saveState = false
             }
             launchSingleTop = true
-            restoreState = true
+            restoreState = false
         }
 
         when (bottomItem) {

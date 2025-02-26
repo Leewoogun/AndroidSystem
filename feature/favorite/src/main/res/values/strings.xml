@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="favorite_topBar_title">내가 좋아하는</string>
+    <string name="favorite_no_movie">해당 장르의 좋아하는 영화가 없습니다.</string>
 </resources>

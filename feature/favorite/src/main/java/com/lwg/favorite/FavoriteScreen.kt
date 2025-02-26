@@ -22,6 +22,7 @@ import com.lwg.designsystem.component.LwgElevatedSelectedChip
 import com.lwg.designsystem.component.LwgHorizontalDivider
 import com.lwg.designsystem.component.LwgVerticalSpacer
 import com.lwg.designsystem.theme.LwgTheme
+import com.lwg.favorite.component.FavoriteEmptyScreen
 import com.lwg.favorite.contract.FavoriteUiState
 import com.lwg.model.movie.Movie
 import com.lwg.ui.FavoriteCard
@@ -50,21 +51,26 @@ internal fun FavoriteScreen(
 
             LwgVerticalSpacer(10.dp)
 
-            LazyRow(
-                horizontalArrangement = Arrangement.spacedBy(12.dp)
-            ) {
-                itemsIndexed(uiState.genreChipList) { index, genre ->
-                    LwgElevatedSelectedChip(
-                        selected = genre.isSelected,
-                        title = genre.name,
-                        onClick = {
-                            onGenreClick(genre.id)
-                        },
-                        modifier = Modifier
-                            .padding(start = if (index == 0) 12.dp else 0.dp) // ✅ 첫 번째 아이템만 start padding 적용
-                    )
+            if (uiState.filteredMovieList.isNotEmpty()) {
+                LazyRow(
+                    horizontalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    itemsIndexed(uiState.genreChipList) { index, genre ->
+                        LwgElevatedSelectedChip(
+                            selected = genre.isSelected,
+                            title = genre.name,
+                            onClick = {
+                                onGenreClick(genre.id)
+                            },
+                            modifier = Modifier
+                                .padding(start = if (index == 0) 12.dp else 0.dp) // ✅ 첫 번째 아이템만 start padding 적용
+                        )
+                    }
                 }
+            } else {
+                FavoriteEmptyScreen()
             }
+
 
             LazyVerticalGrid(
                 columns = GridCells.Fixed(3),
