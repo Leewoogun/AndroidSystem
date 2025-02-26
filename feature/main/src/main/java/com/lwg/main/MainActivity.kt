@@ -42,7 +42,7 @@ class MainActivity: FragmentActivity() {
                     )
                 }
             }
-
+            Logger.i("isShow: ${navigator.shouldShowBottomBar()}")
             LwgTheme {
                 MainScreen(
                     navigator = navigator,

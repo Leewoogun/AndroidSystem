@@ -24,7 +24,7 @@ import coml.lwg.movie_detail.navigation.navigateToMovieDetail
 internal class MainNavigator(
     val navController: NavHostController
 ) {
-    val currentDestination: NavDestination?
+    private val currentDestination: NavDestination?
         @Composable get() {
             val backStackEntry by navController.currentBackStackEntryAsState()
             return remember(backStackEntry) { backStackEntry?.destination }

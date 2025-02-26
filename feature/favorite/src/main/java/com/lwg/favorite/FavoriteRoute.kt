@@ -9,15 +9,15 @@ import androidx.fragment.app.FragmentActivity
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.lwg.favorite.contract.FavoriteUiState
+import com.lwg.ui.LockScreen
 import com.lwg.util.BiometricUtil
 import com.lwg.util.Logger
 
 @Composable
 internal fun FavoriteRoute(
-    favoriteViewModel: FavoriteViewModel = hiltViewModel()
+    viewModel: FavoriteViewModel = hiltViewModel()
 ) {
-
-    val favoriteUiState by favoriteViewModel.favoriteUiState.collectAsStateWithLifecycle()
+    val favoriteUiState by viewModel.favoriteUiState.collectAsStateWithLifecycle()
     val activity = LocalContext.current as FragmentActivity
 
     FavoriteContent(
@@ -26,9 +26,7 @@ internal fun FavoriteRoute(
 
     LaunchedEffect(true) {
         BiometricUtil(activity).checkUseBiometric(
-            onSuccess = {
-                Logger.i("생체 인식 성공!")
-            },
+            onSuccess = viewModel::getFavoriteMovies,
             onFailure = {
                 Logger.i("생체 인식 실패!!")
             }
@@ -45,9 +43,13 @@ private fun FavoriteContent(
             Text("I'm favorite")
         }
         FavoriteUiState.Lock -> {
-            Text("I'm favorite")
+            LockScreen()
         }
 
-        is FavoriteUiState.Movies -> TODO()
+        is FavoriteUiState.Movies -> {
+            FavoriteScreen(
+                uiState = favoriteUiState
+            )
+        }
     }
 }
