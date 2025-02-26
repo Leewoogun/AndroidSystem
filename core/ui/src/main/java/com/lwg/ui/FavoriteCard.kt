@@ -27,6 +27,7 @@ import com.lwg.designsystem.theme.LwgTypo
 fun FavoriteCard(
     imageUrl: String,
     title: String,
+    onDeleteMovie: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     ElevatedCard(
@@ -61,7 +62,7 @@ fun FavoriteCard(
                 modifier = Modifier
                     .padding(bottom = 10.dp)
                     .clickable {
-                        // TODO favorite 삭제 event
+                        onDeleteMovie()
                     },
                 painter = painterResource(R.drawable.ic_favorite_color),
                 contentDescription = null,
@@ -79,7 +80,8 @@ private fun FavoriteCardPreview() {
             modifier = Modifier
                 .width(200.dp),
             imageUrl = "https://picsum.photos/200",
-            title = "겨울 왕국"
+            title = "겨울 왕국",
+            onDeleteMovie = {}
         )
     }
 }

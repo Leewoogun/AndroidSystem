@@ -29,7 +29,8 @@ import com.lwg.ui.FavoriteCard
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun FavoriteScreen(
-    uiState: FavoriteUiState.Movies
+    uiState: FavoriteUiState.Movies,
+    onDeleteMovie: (Int) -> Unit,
 ) {
     Scaffold(
         topBar = {
@@ -71,7 +72,10 @@ internal fun FavoriteScreen(
                 items(uiState.movieList) { movie ->
                     FavoriteCard(
                         imageUrl = movie.imageUrl,
-                        title = movie.title
+                        title = movie.title,
+                        onDeleteMovie = {
+                            onDeleteMovie(movie.movieId)
+                        }
                     )
                 }
             }
@@ -141,8 +145,9 @@ private fun FavoriteScreenPreview() {
                         title = "겨울 왕국",
                         genreList = listOf("판타지", "드라마")
                     ),
-                )
-            )
+                ),
+            ),
+            onDeleteMovie = {}
         )
     }
 }

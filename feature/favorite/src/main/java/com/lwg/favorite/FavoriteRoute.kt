@@ -22,6 +22,7 @@ internal fun FavoriteRoute(
 
     FavoriteContent(
         favoriteUiState = favoriteUiState,
+        onDeleteMovie = viewModel::deleteFavoriteMovie
     )
 
     LaunchedEffect(true) {
@@ -37,6 +38,7 @@ internal fun FavoriteRoute(
 @Composable
 private fun FavoriteContent(
     favoriteUiState: FavoriteUiState,
+    onDeleteMovie: (Int) -> Unit,
 ) {
     when(favoriteUiState) {
         FavoriteUiState.Loading -> {
@@ -48,7 +50,8 @@ private fun FavoriteContent(
 
         is FavoriteUiState.Movies -> {
             FavoriteScreen(
-                uiState = favoriteUiState
+                uiState = favoriteUiState,
+                onDeleteMovie = onDeleteMovie
             )
         }
     }

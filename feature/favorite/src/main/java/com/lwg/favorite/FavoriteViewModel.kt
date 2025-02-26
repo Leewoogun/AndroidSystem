@@ -36,6 +36,12 @@ class FavoriteViewModel @Inject constructor(
         }
     }
 
+    fun deleteFavoriteMovie(movieId: Int) {
+        viewModelScope.launch {
+            movieRepository.deleteFavoriteMovie(movieId)
+        }
+    }
+
     fun showSnackBar(message: String) {
         viewModelScope.launch {
             _favoriteUiEffect.emit(FavoriteUiEffect.ShowSnackBar(message))
