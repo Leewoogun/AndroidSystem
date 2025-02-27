@@ -18,24 +18,33 @@ import com.lwg.main.component.MainBottomItem
 import com.lwg.navigation.MainBottomBarRoute
 import com.lwg.navigation.Route
 import coml.lwg.movie_detail.navigation.navigateToMovieDetail
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 
 internal class MainNavigator(
     val navController: NavHostController
 ) {
+    private val _currentTab = MutableStateFlow<MainBottomItem?>(null)
+    val currentTab: StateFlow<MainBottomItem?> = _currentTab.asStateFlow()
+
     private val currentDestination: NavDestination?
-        @Composable get() {
-            val backStackEntry by navController.currentBackStackEntryAsState()
-            return remember(backStackEntry) { backStackEntry?.destination }
-        }
+        @Composable get() = navController.currentBackStackEntryAsState().value?.destination
 
     val startDestination = MainBottomItem.HOME.route
 
-    val currentTab: MainBottomItem?
-        @Composable get() = MainBottomItem.find { tab ->
-            currentDestination?.hasRoute(tab::class) == true
+    init {
+        // BackStackEntry 변경 감지하여 currentTab 갱신
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            _currentTab.value = MainBottomItem.find { tab ->
+                destination.hasRoute(tab::class)
+            }
         }
+    }
 
     fun navigate(bottomItem: MainBottomItem) {
+        if (bottomItem == currentTab.value) return
+
         val navOptions = navOptions {
             popUpTo(navController.graph.findStartDestination().id) {
                 saveState = false

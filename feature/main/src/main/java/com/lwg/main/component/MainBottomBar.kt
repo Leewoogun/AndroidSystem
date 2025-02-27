@@ -7,11 +7,14 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemColors
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.rememberNavController
 import com.lwg.designsystem.theme.LwgTheme
 import com.lwg.main.MainNavigator
+import com.lwg.util.Logger
 
 @Composable
 internal fun MainBottomBar(
@@ -19,12 +22,13 @@ internal fun MainBottomBar(
     isVisible: Boolean
 ) {
     val bottomBarItems = listOf(MainBottomItem.HOME, MainBottomItem.FAVORITE, MainBottomItem.CALENDAR)
+    val currentTab by navigator.currentTab.collectAsStateWithLifecycle()
 
     if (isVisible) {
         NavigationBar {
             bottomBarItems.forEach { item ->
                 NavigationBarItem(
-                    selected = item == navigator.currentTab,
+                    selected = item == currentTab,
                     onClick = { navigator.navigate(item) },
                     icon = { BottomIcon(item.iconResId) },
                     label = {

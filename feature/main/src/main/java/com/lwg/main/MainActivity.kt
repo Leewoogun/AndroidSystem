@@ -13,7 +13,6 @@ import androidx.lifecycle.lifecycleScope
 import com.lwg.designsystem.theme.LwgTheme
 import com.lwg.main.component.rememberMainNavigator
 import com.lwg.network.NetworkManager
-import com.lwg.util.Logger
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -42,7 +41,7 @@ class MainActivity: FragmentActivity() {
                     )
                 }
             }
-            Logger.i("isShow: ${navigator.shouldShowBottomBar()}")
+
             LwgTheme {
                 MainScreen(
                     navigator = navigator,
