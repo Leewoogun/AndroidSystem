@@ -14,7 +14,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.rememberNavController
 import com.lwg.designsystem.theme.LwgTheme
 import com.lwg.main.MainNavigator
-import com.lwg.util.Logger
 
 @Composable
 internal fun MainBottomBar(

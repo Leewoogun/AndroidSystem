@@ -230,8 +230,8 @@ val BlackA20 = Color(0x20FFFFFF)
 
 val Yellow = Color(0xFFFFC700)
 
+val Red = Color(0xFFAD2F18)
 
-
-
+val Blue = Color(0xFF185BAD)
 
 

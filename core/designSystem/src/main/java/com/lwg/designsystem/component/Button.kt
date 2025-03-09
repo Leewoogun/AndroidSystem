@@ -28,6 +28,7 @@ fun LwgButton(
     modifier: Modifier = Modifier,
     radius: Dp = 4.dp,
     contentVerticalPadding: Dp = 10.dp,
+    color: Color = main,
     isEnabled: Boolean = true
 ) {
     Button(
@@ -36,7 +37,7 @@ fun LwgButton(
         enabled = isEnabled,
         contentPadding = PaddingValues(contentVerticalPadding),
         colors = ButtonDefaults.buttonColors(
-            containerColor = main,
+            containerColor = color,
             disabledContainerColor = Gray1
         ),
         onClick = onClick

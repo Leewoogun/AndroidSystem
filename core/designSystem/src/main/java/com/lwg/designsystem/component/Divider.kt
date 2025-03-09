@@ -9,6 +9,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.lwg.designsystem.theme.Black
+import com.lwg.designsystem.theme.BlackA20
 import com.lwg.designsystem.theme.Gray1
 import com.lwg.designsystem.theme.LwgTheme
 
@@ -16,7 +17,7 @@ import com.lwg.designsystem.theme.LwgTheme
 fun LwgHorizontalDivider(
     modifier : Modifier = Modifier,
     thickness: Dp = 1.dp,
-    color: Color = Color.Red
+    color: Color = BlackA20
 ) {
     HorizontalDivider(
         modifier = modifier,
