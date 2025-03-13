@@ -1,5 +1,8 @@
 package com.lwg.database
 
+import androidx.room.migration.AutoMigrationSpec
+import androidx.sqlite.db.SupportSQLiteDatabase
+
 
 /**
  * Automatic schema migrations sometimes require extra instructions to perform the migration, for
@@ -9,34 +12,9 @@ package com.lwg.database
  * `AutoMigrationSpec`.
  */
 internal object DatabaseMigrations {
-//    @RenameColumn(
-//        tableName = "topics",
-//        fromColumnName = "description",
-//        toColumnName = "shortDescription",
-//    )
-//    class Schema2to3 : AutoMigrationSpec
-//
-//    @DeleteColumn(
-//        tableName = "news_resources",
-//        columnName = "episode_id",
-//    )
-//    @DeleteTable.Entries(
-//        DeleteTable(
-//            tableName = "episodes_authors",
-//        ),
-//        DeleteTable(
-//            tableName = "episodes",
-//        ),
-//    )
-//    class Schema10to11 : AutoMigrationSpec
-//
-//    @DeleteTable.Entries(
-//        DeleteTable(
-//            tableName = "news_resources_authors",
-//        ),
-//        DeleteTable(
-//            tableName = "authors",
-//        ),
-//    )
-//    class Schema11to12 : AutoMigrationSpec
+    class Schema1to2: AutoMigrationSpec {
+        override fun onPostMigrate(db: SupportSQLiteDatabase) {
+            db.execSQL("UPDATE movie_table SET insertTime = '2025-01-01' WHERE insertTime IS NULL")
+        }
+    }
 }

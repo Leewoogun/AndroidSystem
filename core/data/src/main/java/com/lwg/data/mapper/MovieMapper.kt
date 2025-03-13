@@ -4,6 +4,7 @@ import com.lwg.data.model.TopRatedMovieResponse
 import com.lwg.database.entity.MovieEntity
 import com.lwg.model.movie.Genre
 import com.lwg.model.movie.Movie
+import java.time.LocalDate
 
 internal fun TopRatedMovieResponse.MovieData.toMovie(genre: List<Genre>) : Movie = Movie(
     movieId = id,
@@ -17,7 +18,8 @@ internal fun MovieEntity.toMovie(): Movie = Movie(
     imageUrlEndPoint = imageUrlEndPoint,
     title = title,
     genreList = genreList,
-    isFavorite = isFavorite
+    isFavorite = isFavorite,
+    insertTime = insertTime
 )
 
 internal fun Movie.toMovieEntity(): MovieEntity = MovieEntity(
@@ -25,6 +27,7 @@ internal fun Movie.toMovieEntity(): MovieEntity = MovieEntity(
     imageUrlEndPoint = imageUrlEndPoint,
     title = title,
     genreList = genreList,
-    isFavorite = isFavorite
+    isFavorite = isFavorite,
+    insertTime = LocalDate.now()
 )
 
