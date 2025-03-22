@@ -10,3 +10,5 @@ TMDB Api를 활용하여 간단한 영화 관련 프로젝트 만들기
 - [x] navigation 시스템 구축 (with type safety)
 - [x] 디자인 시스템 구축
 - [x] feature 개발 
+- [ ] 기능 고도화
+- [ ] 유닛 테스트, ui 테스트 작성
