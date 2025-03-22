@@ -2,6 +2,7 @@ package com.lwg.designsystem.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -21,7 +22,8 @@ fun LwgImage(
     modifier: Modifier = Modifier
 ) {
     CoilImage(
-        modifier = modifier,
+        modifier = modifier
+            .aspectRatio(1f),
         imageModel = { imageUrl },
         component = rememberImageComponent {
             +CrossfadePlugin(

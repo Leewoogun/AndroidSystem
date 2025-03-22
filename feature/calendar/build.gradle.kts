@@ -14,4 +14,6 @@ dependencies {
     androidTestImplementation(libs.androidx.test.espresso.core)
 
     implementation(projects.core.ui)
+    implementation(projects.core.dataApi)
+    implementation(projects.core.model)
 }

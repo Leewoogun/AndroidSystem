@@ -12,11 +12,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.lwg.ui.calendar.Calendar
-import com.lwg.ui.calendar.CalendarComponent
 import com.lwg.ui.calendar.CalendarDialogEffect
 import com.lwg.ui.calendar.CalendarTopBar
-import com.lwg.ui.calendar.CalendarViewModel
 import com.lwg.ui.calendar.CalendarYearMonthDialog
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -26,6 +23,7 @@ internal fun CalendarRoute(
 ) {
     val calendarState by viewModel.calendarState.collectAsStateWithLifecycle()
     val calendarDialogEffect by viewModel.calendarDialogEffect.collectAsStateWithLifecycle()
+    val favoriteMovie by viewModel.favoriteMovie.collectAsStateWithLifecycle()
 
     DialogContent(
         calendarDialogEffect = calendarDialogEffect,
@@ -51,9 +49,10 @@ internal fun CalendarRoute(
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
-            CalendarComponent(
-                calendarState.year,
-                calendarState.month
+            CalendarScreen(
+                calendarState = calendarState,
+                favoriteMovie = favoriteMovie,
+                onChangeSelectedDay = viewModel::onSelectDay
             )
         }
     }

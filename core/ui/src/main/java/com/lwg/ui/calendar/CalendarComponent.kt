@@ -1,17 +1,24 @@
 package com.lwg.ui.calendar
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.lwg.designsystem.component.LwgVerticalSpacer
 import com.lwg.designsystem.theme.LwgTheme
 import com.lwg.designsystem.theme.LwgTypo
 import com.lwg.designsystem.theme.Red
@@ -21,13 +28,12 @@ import java.time.YearMonth
 @Composable
 fun CalendarComponent(
     year: Int,
-    month: Int
+    month: Int,
+    selectedDay: LocalDate,
+    onChangeSelectedDay: (LocalDate) -> Unit,
 ) {
     val dayWithWeekDay = getDaysWithWeekday(year, month) // 날짜 + 요일 정보
-
-    Column(
-        modifier = Modifier.fillMaxSize()
-    ) {
+    Column {
         DayOfWeekComponent()
 
         Column {
@@ -36,20 +42,45 @@ fun CalendarComponent(
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     week.forEach { (day, weekday) ->
-                        val textColor = if (weekday == DayOfWeek.SUNDAY) Red else MaterialTheme.colorScheme.onBackground
+                        val isSelected = checkSelectedDay(year, month, day, selectedDay)
+                        val textColor = when {
+                            isSelected -> MaterialTheme.colorScheme.onPrimary
+                            weekday == DayOfWeek.SUNDAY -> Red
+                            else -> MaterialTheme.colorScheme.onBackground
+                        }
+
                         val dayText = if (day == 0) "" else day.toString()
 
                         Box(
                             modifier = Modifier
                                 .weight(1f)
-                                .aspectRatio(1f),
+                                .aspectRatio(1f)
+                                .clickable {
+                                    if (day != 0) {
+                                        val date = LocalDate.of(year, month, day)
+                                        onChangeSelectedDay(date)
+                                    }
+                                },
                             contentAlignment = Alignment.Center
                         ) {
-                            Text(
-                                text = dayText,
-                                style = LwgTypo.typography.bodyLargeR,
-                                color = textColor
-                            )
+                            Column {
+                                Box(
+                                    modifier = Modifier
+                                        .size(40.dp)
+                                        .clip(CircleShape)
+                                        .background(
+                                            if (isSelected) MaterialTheme.colorScheme.primary else Color.Transparent
+                                        ),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Text(
+                                        text = dayText,
+                                        style = LwgTypo.typography.bodyLargeR,
+                                        color = textColor
+                                    )
+                                }
+                                LwgVerticalSpacer(10.dp)
+                            }
                         }
                     }
                 }
@@ -58,7 +89,7 @@ fun CalendarComponent(
     }
 }
 
-fun getDaysWithWeekday(year: Int, month: Int): List<List<Pair<Int, DayOfWeek>>> {
+private fun getDaysWithWeekday(year: Int, month: Int): List<List<Pair<Int, DayOfWeek>>> {
     val daysInMonth = YearMonth.of(year, month).lengthOfMonth()
     val firstDayOfWeek = LocalDate.of(year, month, 1).dayOfWeek
     val lastDayOfWeek = LocalDate.of(year, month, daysInMonth).dayOfWeek
@@ -82,9 +113,7 @@ fun getDaysWithWeekday(year: Int, month: Int): List<List<Pair<Int, DayOfWeek>>> 
     return days.chunked(7)
 }
 
-
-
-fun mapToCustomDayOfWeek(dayOfWeek: java.time.DayOfWeek): DayOfWeek {
+private fun mapToCustomDayOfWeek(dayOfWeek: java.time.DayOfWeek): DayOfWeek {
     return when (dayOfWeek) {
         java.time.DayOfWeek.MONDAY -> DayOfWeek.MONDAY
         java.time.DayOfWeek.TUESDAY -> DayOfWeek.TUESDAY
@@ -94,6 +123,13 @@ fun mapToCustomDayOfWeek(dayOfWeek: java.time.DayOfWeek): DayOfWeek {
         java.time.DayOfWeek.SATURDAY -> DayOfWeek.SATURDAY
         java.time.DayOfWeek.SUNDAY -> DayOfWeek.SUNDAY
     }
+}
+
+private fun checkSelectedDay(year: Int, month: Int, day: Int, selectedDay: LocalDate): Boolean {
+    if (day == 0) return false
+    val date = LocalDate.of(year, month, day)
+
+    return date == selectedDay
 }
 
 @Composable
@@ -106,7 +142,9 @@ private fun CalendarComponentPreview() {
 
         CalendarComponent(
             year = year,
-            month = month
+            month = month,
+            selectedDay = LocalDate.now(),
+            onChangeSelectedDay = {},
         )
     }
 }
