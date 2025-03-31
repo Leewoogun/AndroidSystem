@@ -3,7 +3,9 @@ package com.lwg.home
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
@@ -27,6 +29,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import com.lwg.designsystem.component.LoadingProgressIndicatorAnimation
+import com.lwg.designsystem.component.LwgProgressIndicator
 import com.lwg.designsystem.theme.LwgTheme
 import com.lwg.home.component.FavoriteBox
 import com.lwg.model.movie.Movie
@@ -39,20 +43,40 @@ import kotlin.math.roundToInt
 internal fun HomeScreen(
     movieList: List<Movie>,
     lazyListState: LazyListState,
+    isLoading: Boolean,
     onFavoriteClick: (Movie) -> Unit,
     onMovieClick: (Int) -> Unit
 ) {
-    LazyColumn(
+    Box(
         modifier = Modifier
-            .fillMaxHeight(),
-        state = lazyListState
+            .fillMaxSize()
     ) {
-        items(movieList) { movie ->
-            SwipeMovieItem(
-                movie = movie,
-                onFavoriteClick = onFavoriteClick,
-                onMovieClick = onMovieClick
-            )
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize(),
+            state = lazyListState
+        ) {
+            items(movieList) { movie ->
+                SwipeMovieItem(
+                    movie = movie,
+                    onFavoriteClick = onFavoriteClick,
+                    onMovieClick = onMovieClick
+                )
+            }
+        }
+
+        Box(
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .padding(bottom = 30.dp),
+        ) {
+            LoadingProgressIndicatorAnimation(
+                visible = isLoading
+            ) {
+                LwgProgressIndicator(
+                    color = MaterialTheme.colorScheme.primaryContainer
+                )
+            }
         }
     }
 }
@@ -123,6 +147,7 @@ private fun HomeScreenPreview() {
     LwgTheme {
         HomeScreen(
             lazyListState = rememberLazyListState(),
+            isLoading = true,
             movieList = listOf(
                 Movie(
                     imageUrlEndPoint = "/9REO1DLpmwhrBJY3mYW5eVxkXFM.jpg",

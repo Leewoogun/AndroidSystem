@@ -8,6 +8,7 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
@@ -44,6 +45,26 @@ fun TopToBottomToTopAnimatedVisibility(
         ),
         content = content
     )
+}
+
+@Composable
+fun LoadingProgressIndicatorAnimation(
+    visible: Boolean,
+    content: @Composable AnimatedVisibilityScope.() -> Unit
+) {
+    AnimatedVisibility(
+        visible = visible,
+        enter = slideInVertically(
+            initialOffsetY = { it }, // Slide from the bottom
+            animationSpec = tween(durationMillis = 300) // Customize the duration
+        ),
+        exit = slideOutVertically(
+            targetOffsetY = { it }, // Slide to the bottom
+            animationSpec = tween(durationMillis = 300) // Customize the duration
+        )
+    ) {
+        content() // Calling the content lambda
+    }
 }
 
 @Composable

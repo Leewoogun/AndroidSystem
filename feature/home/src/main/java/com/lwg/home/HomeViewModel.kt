@@ -1,5 +1,6 @@
 package com.lwg.home
 
+import androidx.compose.runtime.MutableState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lwg.data_api.MovieRepository
@@ -10,11 +11,13 @@ import com.lwg.model.movie.Movie
 import com.lwg.util.Logger
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.onStart
@@ -43,14 +46,23 @@ internal class HomeViewModel @Inject constructor(
     private val _homeUiEffect: MutableSharedFlow<HomeUiEffect> = MutableSharedFlow()
     val homeUiEffect: SharedFlow<HomeUiEffect> get() = _homeUiEffect
 
+    private val _isLoading = MutableStateFlow(false)
+    val isLoading: StateFlow<Boolean> get() = _isLoading.asStateFlow()
+
     private fun getMovieList() {
         viewModelScope.launch {
             moviePage.flatMapLatest { page ->
+                if (page  > 0) {
+                    _isLoading.update { true }
+                    delay(500)
+                }
+
                 getMovieUseCase(
                     page = page,
                     onError = ::showSnackBar
                 )
             }.collectLatest { movies ->
+                _isLoading.update { false }
                 _homeUiState.update {
                     when (it) {
                         HomeUiState.Loading -> {

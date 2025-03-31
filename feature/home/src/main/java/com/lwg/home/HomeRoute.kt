@@ -1,5 +1,6 @@
 package com.lwg.home
 
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
@@ -9,6 +10,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.lwg.designsystem.component.LwgProgressIndicator
@@ -25,8 +27,9 @@ internal fun HomeRoute(
 ) {
 
     val homeUiState by viewModel.homeUiState.collectAsStateWithLifecycle()
+    val isLoading by viewModel.isLoading.collectAsStateWithLifecycle()
     val lazyListState = rememberLazyListState()
-
+    Logger.i("isLoading: $isLoading")
     val canScrollForward by remember {
         derivedStateOf { lazyListState.canScrollForward }
     }
@@ -36,6 +39,7 @@ internal fun HomeRoute(
     HomeContent(
         homeUiState = homeUiState,
         lazyListState = lazyListState,
+        isLoading = isLoading,
         onFavoriteClick = viewModel::updateRemoveFavoriteMovie,
         onMovieClick = onMovieClick
     )
@@ -65,16 +69,18 @@ internal fun HomeRoute(
 private fun HomeContent(
     homeUiState: HomeUiState,
     lazyListState: LazyListState,
+    isLoading: Boolean,
     onFavoriteClick: (Movie) -> Unit,
     onMovieClick: (Int) -> Unit
 ) {
     when (homeUiState) {
-        HomeUiState.Loading -> { LwgProgressIndicator() }
+        HomeUiState.Loading -> { LwgProgressIndicator(modifier = Modifier.fillMaxSize(),) }
 
         is HomeUiState.HomeData -> {
             HomeScreen(
                 movieList = homeUiState.movies,
                 lazyListState = lazyListState,
+                isLoading = isLoading,
                 onFavoriteClick = onFavoriteClick,
                 onMovieClick = onMovieClick
             )
