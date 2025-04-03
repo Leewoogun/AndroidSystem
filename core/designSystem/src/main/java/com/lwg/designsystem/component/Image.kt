@@ -1,20 +1,19 @@
 package com.lwg.designsystem.component
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.lwg.designsystem.R
 import com.skydoves.landscapist.ImageOptions
-import com.skydoves.landscapist.animation.crossfade.CrossfadePlugin
 import com.skydoves.landscapist.coil.CoilImage
-import com.skydoves.landscapist.components.rememberImageComponent
 
 @Composable
 fun LwgImage(
@@ -25,16 +24,12 @@ fun LwgImage(
         modifier = modifier
             .aspectRatio(1f),
         imageModel = { imageUrl },
-        component = rememberImageComponent {
-            +CrossfadePlugin(
-                duration = 550
-            )
-        },
         loading = { LoadingImage(modifier) },
         imageOptions = ImageOptions(
             contentScale = ContentScale.Crop,
             alignment = Alignment.Center
         ),
+        previewPlaceholder = painterResource(R.drawable.ic_image_sample)
     )
 }
 
@@ -42,9 +37,9 @@ fun LwgImage(
 fun LoadingImage(
     modifier: Modifier = Modifier
 ) {
-    Box(
-        modifier = modifier
-            .background(color = MaterialTheme.colorScheme.secondary)
+    Surface(
+        modifier = modifier,
+        color = Color.Black.copy(alpha = 0.5f)
     ) {
 
     }
@@ -54,7 +49,7 @@ fun LoadingImage(
 @Preview(showBackground = true)
 fun LoadingImagePreview() {
     LoadingImage(
-        modifier = Modifier.size(120.dp)
+        modifier = Modifier.size(40.dp)
     )
 }
 
