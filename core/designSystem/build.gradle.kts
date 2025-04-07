@@ -17,6 +17,8 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.landscapist.coil)
     implementation(libs.landscapist.animation)
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
 
     implementation(libs.androidx.activity.compose)
     implementation(libs.ballon)

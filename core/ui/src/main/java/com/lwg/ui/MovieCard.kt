@@ -17,6 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.lwg.designsystem.component.LwgBalloon
 import com.lwg.designsystem.component.LwgImage
+import com.lwg.designsystem.component.LwgImage2
 import com.lwg.designsystem.theme.LwgTheme
 import com.lwg.designsystem.theme.LwgTypo
 
@@ -33,7 +34,7 @@ fun MovieCard(
             .padding(10.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        LwgImage(
+        LwgImage2(
             modifier = Modifier.size(40.dp),
             imageUrl = imageUrl
         )
